@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from '../organisms/views/View.module.css';
+import React from "react";
+import styles from "../../organisms/views/View.module.css";
 
 interface InfoItemProps {
   logo?: string;
@@ -9,7 +9,13 @@ interface InfoItemProps {
   meta?: string;
 }
 
-export const InfoItem: React.FC<InfoItemProps> = ({ logo, logoAlt, title, subtitle, meta }) => {
+export const InfoItem: React.FC<InfoItemProps> = ({
+  logo,
+  logoAlt,
+  title,
+  subtitle,
+  meta,
+}) => {
   return (
     <div className={styles.infoItemWithLogo}>
       {logo && <img src={logo} alt={logoAlt} className={styles.schoolLogo} />}

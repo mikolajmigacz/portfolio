@@ -1,0 +1,37 @@
+.backButton {
+  margin-bottom: var(--spacing-lg);
+}
+
+.title {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.description {
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.techSection {
+  margin-bottom: var(--spacing-lg);
+}
+
+.techTitle {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.links {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}

@@ -1,0 +1,1 @@
+export { BioWithIcons } from "./BioWithIcons";

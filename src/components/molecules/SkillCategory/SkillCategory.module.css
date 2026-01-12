@@ -1,0 +1,16 @@
+.section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.header {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
