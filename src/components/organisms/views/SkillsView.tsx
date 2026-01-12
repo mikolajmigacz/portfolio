@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { portfolioData, getTechIcon } from '../../../data/config';
 import { Tag } from '../../atoms/Tag';
-import { Card } from '../../atoms/Card';
 import styles from './View.module.css';
 
 export const SkillsView: React.FC = () => {
@@ -67,6 +66,6 @@ const itemVariants = {
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 24 }
+    transition: { type: 'spring' as const, stiffness: 300, damping: 24 }
   }
 };
