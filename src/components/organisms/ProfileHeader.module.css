@@ -1,0 +1,152 @@
+/* Container for positioning */
+.header {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  pointer-events: none; /* Let clicks pass through empty areas */
+  box-sizing: border-box;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* CSS transition for non-layout props */
+}
+
+/* Hero Variant: Centered */
+.header.hero {
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  padding-bottom: 0; /* No offset - all content centered */
+  background: transparent;
+}
+
+/* Footer Variant: Bottom Bar */
+.header.footer {
+  top: auto;
+  bottom: 0;
+  height: auto;
+  background-color: var(--bg-primary);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: var(--spacing-md) var(--spacing-xl);
+  pointer-events: auto; /* Enable interaction in footer */
+}
+
+/* Content Container */
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center text in hero */
+  pointer-events: auto;
+}
+
+/* Footer specific layout overrides */
+.header.footer .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Match content width */
+  margin: 0 auto;
+}
+
+.name {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--text-primary); /* Changed to semantic */
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: var(--text-secondary); /* Changed to semantic */
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.details {
+  margin-top: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.detailText {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.socials {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  pointer-events: auto;
+}
+
+.navSlot {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  justify-content: center;
+  pointer-events: auto; /* Enable clicking */
+}
+
+/* Responsive Footer adjustments */
+@media (max-width: 768px) {
+  /* Footer Mobile - Compact */
+  .header.footer {
+    padding: var(--spacing-sm); /* Minimal padding */
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .header.footer .container {
+    flex-direction: row; /* Horizontal row */
+    flex-wrap: wrap; /* Wrap if needed, but try to fit */
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+  }
+  
+  /* Hide title (Frontend Dev) in footer on mobile to save space? 
+     Or make it tiny. User said "duzo mniejszy footer". */
+  .header.footer .title {
+    display: none; /* Hide title on mobile footer */
+  }
+
+  .header.footer .name {
+    font-size: 1rem !important; /* Small name */
+    text-align: left;
+  }
+  
+  .header.footer .details {
+     display: none; /* Hide email/location in footer on mobile to save vertical space? 
+                       User complains "zaslania footer". If we remove details it gets very short. */
+  }
+
+  .header.footer .socials {
+    margin-top: 0;
+    transform: scale(0.8); /* Smaller buttons */
+  }
+  
+  /* Hero Responsive - Unchanged logic */
+  .header.hero .name {
+    font-size: 2.5rem !important;
+  }
+  .header.hero .title {
+    font-size: 1.1rem !important;
+  }
+  .navSlot {
+    margin-top: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+}
+

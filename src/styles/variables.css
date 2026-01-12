@@ -1,0 +1,43 @@
+:root {
+  /*
+    Palette:
+    #F6F0D7 - Lightest (Backgrounds)
+    #C5D89D - Light (Accents, Secondary bg)
+    #9CAB84 - Medium (Text, Borders)
+    #89986D - Dark (Headings, Primary actions)
+  */
+  --color-lightest: #F6F0D7;
+  --color-light: #C5D89D;
+  --color-medium: #9CAB84;
+  --color-dark: #89986D;
+
+  /* Semantic mappings */
+  --bg-primary: var(--color-lightest);
+  --bg-secondary: var(--color-light);
+  --text-primary: var(--color-dark);
+  --text-secondary: var(--color-medium);
+  --accent: var(--color-medium);
+  --border: var(--color-medium);
+  
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  /* Professional Font Stack */
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Font Sizes */
+  --font-size-name: 4rem; /* Big */
+  --font-size-title: 1.5rem;
+  --font-size-nav: 2rem;
+}
+

@@ -1,0 +1,227 @@
+.viewContainer {
+  width: 100%;
+  height: 100%;
+  padding-right: var(--spacing-md);
+}
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl); /* Much larger gap between main rows (Bio -> Grid -> Interests) */
+  padding-bottom: var(--spacing-3xl);
+}
+
+.bioSection {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 800px;
+}
+
+.gridTwoColumn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl); /* Gap between Educ and Certs columns */
+}
+
+@media (max-width: 768px) {
+  .gridTwoColumn {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl); /* Huge gap when stacked on mobile: End of Educ -> Start of Certs */
+  }
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  color: var(--color-dark);
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--color-light);
+  padding-bottom: var(--spacing-xs);
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.content {
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Skills Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  .gridProjects {
+     display: flex;
+     flex-direction: column;
+     gap: var(--spacing-lg);
+  }
+  .viewContainer {
+     padding-right: 0;
+  }
+  .sectionTitle {
+      font-size: 1.75rem;
+      margin-bottom: var(--spacing-md);
+  }
+}
+
+/* Skills Redesign */
+.skillsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+.skillSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.categoryHeader {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  border-left: 3px solid var(--accent);
+  padding-left: var(--spacing-sm);
+}
+
+.skillCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.infoItemWithLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  transition: transform 0.2s ease;
+}
+
+.infoItemWithLogo:hover {
+  transform: translateX(4px);
+}
+
+.schoolLogo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: #fff; /* White bg for logos usually looks best */
+  padding: 4px;
+}
+
+/* Inline Tags in Bio */
+.inlineTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-secondary);
+  padding: 0 8px; /* Slightly reduced vertical padding, aligned via height */
+  height: 1.5em; /* Fixed height for consistency */
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.95em;
+  color: #fff; /* White text for better contrast against green */
+  margin: 0 4px;
+  vertical-align: middle;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle pop */
+}
+
+.inlineIcon {
+  width: 1.2em;
+  height: 1.2em;
+  object-fit: contain;
+}
+
+/* Tag overrides for skills page if needed to be bigger? */
+/* We can use CSS module composition or just let them be standard size since they scale on hover */
+
+.tagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+/* Detailed Views (Work/Projects) */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.gridProjects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.backButton {
+  margin-bottom: var(--spacing-md);
+  /* Removed conflicting styles (bg, border, color) to let Button component handle them */
+  display: inline-flex;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+/* Spacing Fixes */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg); /* Increased from md */
+}
+
+.categoryHeader {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 var(--spacing-sm) 0; /* Add bottom margin to header */
+  border-left: 3px solid var(--accent);
+  padding-left: var(--spacing-sm);
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg); /* Increased gap between items */
+}
+
+/* Interest Tag Fix */
+.interestTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-medium);
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: transparent;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.interestTag:hover {
+  background: var(--color-medium);
+  color: #fff;
+  border-color: var(--color-medium);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,53 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-weight: 500;
+  border: 4px solid transparent; 
+  /* "4px solid transparent" is a bit much, maybe 1px is better but user wants "bold" ? No, user wants minimalist. */
+  border-width: 1px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
+  gap: var(--spacing-sm);
+}
+
+.primary {
+  background-color: var(--accent); /* Was color-dark */
+  color: var(--bg-primary); /* Text on accent */
+  border-color: var(--accent);
+}
+
+.primary:hover {
+  filter: brightness(1.1);
+  border-color: var(--accent);
+}
+
+.secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--bg-secondary);
+}
+
+.secondary:hover {
+  filter: brightness(1.1);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--text-primary); /* Visible on dark bg */
+  border-color: var(--text-primary);
+}
+
+.outline:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

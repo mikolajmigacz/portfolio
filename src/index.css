@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+:root {
+  /*
+    Palette:
+    #F6F0D7 - Lightest (Backgrounds)
+    #C5D89D - Light (Accents, Secondary bg)
+    #9CAB84 - Medium (Text, Borders)
+    #89986D - Dark (Headings, Primary actions)
+  */
+  --color-lightest: #F6F0D7;
+  --color-light: #C5D89D;
+  --color-medium: #9CAB84;
+  --color-dark: #89986D;
+
+  /* Semantic mappings - Dark Mode */
+  /* Semantic mappings - Dark Mode */
+  --bg-primary: var(--color-dark);
+  --bg-secondary: var(--color-medium);
+  --text-primary: var(--color-lightest);
+  --text-secondary: rgba(246, 240, 215, 0.7); /* Lightest with opacity */
+  --accent: var(--color-lightest);
+  --border: var(--color-medium);
+  
+  /* Tag Semantics */
+  --tag-bg: var(--color-lightest);
+  --tag-text: var(--color-dark);
+  
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4.5rem; /* Larger section gap */
+  --spacing-3xl: 6rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+
+  /* Professional Font Stack */
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Font Sizes */
+  --font-size-name: 4rem; /* Big */
+  --font-size-title: 1.5rem;
+  --font-size-nav: 2rem;
+  
+  /* Global Defaults */
+  font-family: var(--font-family);
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color-scheme: light;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden; /* Non-scrollable */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar styling for content window */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-medium);
+}

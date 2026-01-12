@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  gap: var(--spacing-lg); /* Larger gap for horizontal spacing */
+  margin-top: var(--spacing-lg);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+@media (max-width: 768px) {
+  .nav {
+    align-items: center;
+  }
+}

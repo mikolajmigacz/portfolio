@@ -1,0 +1,23 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm); /* Gap between icon and text */
+  padding: var(--spacing-xs) var(--spacing-md); /* Wider padding */
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-2px); /* Clickable feel */
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  object-fit: contain;
+}

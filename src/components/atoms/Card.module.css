@@ -1,0 +1,21 @@
+.card {
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-primary); /* Default base */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.default {
+  /* Dark Glass Theme for Cards */
+  background-color: rgba(0, 0, 0, 0.2); /* Darkened container */
+  border: 1px solid rgba(246, 240, 215, 0.1); /* Subtle light border */
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px); /* Modern glass feel */
+  color: var(--text-primary); /* Inherit global light text */
+}
+
+.flat {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
