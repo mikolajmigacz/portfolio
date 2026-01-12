@@ -46,6 +46,12 @@ export const techIcons: Record<string, string> = {
   'CompTIA Security+': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/network/network-original.svg', // Placeholder or specific icon
 };
 
+// Helper to get correct asset path (handles GitHub Pages base path)
+export const getAssetPath = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+};
+
 // Helper to safely get icon or fallback
 export const getTechIcon = (techName: string) => {
   return techIcons[techName] || null;
@@ -78,7 +84,7 @@ export const portfolioData: PortfolioData = {
       endDate: 'Present',
       description: 'Currently involved in the development of a decision service. Previously designed and implemented a reporting module leveraging AWS cloud services. Regularly responsible for feature development and performance optimization.',
       technologies: ['React', 'Node.js', 'Go', 'AWS', 'gRPC'],
-      logo: '/logos/visa.webp'
+      logo: getAssetPath('/logos/visa.webp')
     },
     {
       id: 'ant',
@@ -88,7 +94,7 @@ export const portfolioData: PortfolioData = {
       endDate: 'March 2025',
       description: 'Implemented a real-time production scheduling module to improve operational efficiency. Built a responsive user interface using Ant Design and Redux, ensuring smooth interaction with complex production data.',
       technologies: ['React', 'Node.js', 'PostgreSQL', 'gRPC', 'Redux', 'Ant Design'],
-      logo: '/logos/ant.webp'
+      logo: getAssetPath('/logos/ant.webp')
     },
     {
       id: 'kryptos',
@@ -98,7 +104,7 @@ export const portfolioData: PortfolioData = {
       endDate: 'January 2023',
       description: 'Created a customer panel with features for order tracking, chat, and invoices. Worked on backend and MongoDB optimizations to reduce response times and improve overall system performance.',
       technologies: ['React', 'Node.js', 'MongoDB', 'REST'],
-      logo: '/logos/kryptos.webp'
+      logo: getAssetPath('/logos/kryptos.webp')
     },
     {
       id: 'comarch',
@@ -108,7 +114,7 @@ export const portfolioData: PortfolioData = {
       endDate: 'September 2022',
       description: 'Optimized the WMS module by improving SQL queries and implementing caching. Developed automated reporting features to reduce manual workload for end-users.',
       technologies: ['.NET', 'ASP.NET', 'SQLite'],
-      logo: '/logos/comarch.webp'
+      logo: getAssetPath('/logos/comarch.webp')
     }
   ],
   projects: [
@@ -148,14 +154,14 @@ export const portfolioData: PortfolioData = {
       degree: 'Master of Science in Computer Science',
       startDate: 'February 2023',
       endDate: 'March 2025',
-      logo: '/logos/pw.webp'
+      logo: getAssetPath('/logos/pw.webp')
     },
     {
       school: 'AGH University of Science and Technology',
       degree: 'Bachelor of Science in Computer Science',
       startDate: 'October 2019',
       endDate: 'January 2023',
-      logo: '/logos/agh.webp'
+      logo: getAssetPath('/logos/agh.webp')
     }
   ],
   certifications: [
@@ -163,7 +169,7 @@ export const portfolioData: PortfolioData = {
       name: 'AZ-900: Microsoft Azure Fundamentals',
       issuer: 'Microsoft',
       id: '179B069D7B6B7A19',
-      logo: '/logos/microsoft.webp'
+      logo: getAssetPath('/logos/microsoft.webp')
     }
   ],
   languages: [
