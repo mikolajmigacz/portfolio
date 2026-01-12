@@ -8,9 +8,11 @@ import { Loader } from './components/atoms/Loader';
 import { AboutView, SkillsView, WorkView, ProjectsView } from './components/organisms/views';
 import { portfolioData } from './data/config';
 
+type ViewId = 'home' | 'about' | 'work' | 'projects' | 'skills';
+
 function App() {
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState('home'); // 'home' | 'about' | 'work' | 'projects' | 'skills'
+  const [activeView, setActiveView] = useState<ViewId>('home');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,7 +22,7 @@ function App() {
   }, []);
 
   const handleNavigate = (viewId: string) => {
-    setActiveView(viewId);
+    setActiveView(viewId as ViewId);
   };
 
   const handleBack = () => {
@@ -36,6 +38,8 @@ function App() {
       default: return null;
     }
   };
+
+  const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
     <>
@@ -70,7 +74,7 @@ function App() {
                 {activeView !== 'home' && (
                 <SectionTemplate 
                     key="section"
-                    title={activeView.charAt(0).toUpperCase() + activeView.slice(1)} // Basic capitalization
+                    title={capitalize(activeView)}
                     onBack={handleBack}
                 >
                     {renderContent()}
@@ -84,3 +88,4 @@ function App() {
 }
 
 export default App;
+

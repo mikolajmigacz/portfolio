@@ -1,12 +1,11 @@
 import type { PortfolioData } from '../types';
 
 export const techIcons: Record<string, string> = {
-  // Frontend
   'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
   'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
   'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
   'JavaScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-  'HTML/CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', // Composite? Using HTML5 for now
+  'HTML/CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
   'Tailwind': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
   'Ant Design': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/antdesign/antdesign-original.svg',
   'Material-UI': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg',
@@ -14,8 +13,6 @@ export const techIcons: Record<string, string> = {
   'Angular': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
   'Vue.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
   'Sass': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg',
-
-  // Backend & DB
   'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
   'NestJS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg',
   'Go': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg',
@@ -24,15 +21,13 @@ export const techIcons: Record<string, string> = {
   'Kotlin': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
   'C#': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
   '.NET': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg',
-  'ASP.NET': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-plain.svg', // scalable fallback
+  'ASP.NET': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-plain.svg',
   'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
   'PostgreSQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
   'MongoDB': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
   'SQLite': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg',
   'Firebase': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
   'GraphQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg',
-  
-  // Cloud & Tools
   'AWS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
   'Azure': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
   'Git': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
@@ -42,25 +37,21 @@ export const techIcons: Record<string, string> = {
   'Dart': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
   'Flutter': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
   'Android': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg',
-  'gRPC': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg', // Placeholder / Generic google or no icon? gRPC has official logo but maybe not in devicon. Using fallback or no icon if null.
-  'CompTIA Security+': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/network/network-original.svg', // Placeholder or specific icon
+  'gRPC': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg',
+  'CompTIA Security+': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/network/network-original.svg',
 };
 
-// Helper to get correct asset path (handles GitHub Pages base path)
-export const getAssetPath = (path: string) => {
+export const getAssetPath = (path: string): string => {
   const base = import.meta.env.BASE_URL || '/';
   return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
 };
 
-// Helper to safely get icon or fallback
-export const getTechIcon = (techName: string) => {
+export const getTechIcon = (techName: string): string | null => {
   return techIcons[techName] || null;
 };
 
 export const portfolioData: PortfolioData = {
-  // ... profile ...
   profile: {
-    // ... keep existing ...
     name: 'Mikołaj Migacz',
     title: 'Software Engineer',
     location: 'Warsaw, Poland',
@@ -74,7 +65,6 @@ export const portfolioData: PortfolioData = {
       email: 'mig.mikolaj@gmail.com'
     }
   },
-
   experience: [
     {
       id: 'visa',
@@ -119,12 +109,11 @@ export const portfolioData: PortfolioData = {
   ],
   projects: [
     {
-       id: 'jobmatch',
-       title: 'JobMatch',
-       description: 'A cutting-edge job matching platform built with a Microservices architecture and Microfrontends. Features an AI-powered CV analysis engine (deep learning via Gemini API) to provide candidates with instant, personalized feedback. The UX is designed for seamless interaction, featuring real-time "It\'s a Match!" notifications, smart filters, and a secure, role-based dashboard for both employers and job seekers. Fully type-safe from database to UI.',
-       technologies: ['TypeScript', 'Node.js', 'NestJS', 'React', 'AWS', 'Docker', 'Microservices'], // Added NestJS, Docker to techIcons above
-       repoUrl: 'https://github.com/mikolajmigacz/JobMatch',
-       // No liveUrl as requested
+      id: 'jobmatch',
+      title: 'JobMatch',
+      description: 'A cutting-edge job matching platform built with a Microservices architecture and Microfrontends. Features an AI-powered CV analysis engine (deep learning via Gemini API) to provide candidates with instant, personalized feedback. The UX is designed for seamless interaction, featuring real-time "It\'s a Match!" notifications, smart filters, and a secure, role-based dashboard for both employers and job seekers. Fully type-safe from database to UI.',
+      technologies: ['TypeScript', 'Node.js', 'NestJS', 'React', 'AWS', 'Docker', 'Microservices'],
+      repoUrl: 'https://github.com/mikolajmigacz/JobMatch',
     }
   ],
   skills: [
@@ -177,3 +166,4 @@ export const portfolioData: PortfolioData = {
     { language: 'English', level: 'B2' }
   ]
 };
+

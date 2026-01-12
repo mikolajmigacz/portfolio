@@ -8,7 +8,7 @@ import { Button } from '../atoms/Button';
 interface ProfileHeaderProps {
   profile: UserProfile;
   variant?: 'hero' | 'footer';
-  children?: React.ReactNode; // For Navigation in hero mode
+  children?: React.ReactNode;
 }
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant = 'hero', children }) => {
@@ -17,8 +17,8 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant =
   return (
     <motion.header 
       className={`${styles.header} ${isFooter ? styles.footer : styles.hero}`}
-      layout // Animates position/size changes
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth easeOutExpo-ish
+      layout
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div className={styles.container} layout>
         <motion.div className={styles.mainInfo} layout>
@@ -79,7 +79,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant =
             </a>
         </motion.div>
 
-        {/* Navigation slot - only shown in hero mode */}
         {!isFooter && children && (
             <motion.div layout className={styles.navSlot}>
                 {children}
@@ -89,3 +88,4 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant =
     </motion.header>
   );
 };
+

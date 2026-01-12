@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   technologies: string[];
   imageUrl?: string;
-  repoUrl?: string; // GitHub
+  repoUrl?: string;
   liveUrl?: string;
 }
 
@@ -13,7 +13,7 @@ export interface Job {
   company: string;
   role: string;
   startDate: string;
-  endDate: string; // 'Present'
+  endDate: string;
   description: string;
   technologies: string[];
   logo?: string;
@@ -34,9 +34,9 @@ export interface SocialLinks {
 export interface UserProfile {
   name: string;
   title: string;
-  location: string; // New field
-  shortBio: string; // Used for hero
-  longBio: string; // Used for 'About' section
+  location: string;
+  shortBio: string;
+  longBio: string;
   avatarUrl?: string;
   interests: string[];
   socials: SocialLinks;
@@ -54,7 +54,7 @@ export interface Certification {
   name: string;
   issuer: string;
   date?: string;
-  id?: string; // Credential ID
+  id?: string;
   logo?: string;
 }
 
@@ -72,3 +72,4 @@ export interface PortfolioData {
   certifications: Certification[];
   languages: Language[];
 }
+
