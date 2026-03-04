@@ -91,7 +91,7 @@ export const portfolioData: PortfolioData = {
     socials: {
       github: "https://github.com/mikolajmigacz",
       linkedin: "https://www.linkedin.com/in/mikolaj-migacz/",
-      cv: "https://drive.google.com/file/d/1rHpmxBS0ICz3pprTkFy0E4HHDp2P9TG8/view",
+      cv: "https://drive.google.com/file/d/1flZehNVwBjdOAH_I_IO2vfIGe9xd2weP/view",
       email: "mig.mikolaj@gmail.com",
     },
   },
