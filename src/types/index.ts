@@ -1,7 +1,9 @@
 export interface Project {
   id: string;
   title: string;
-  description: string;
+  summary: string;
+  highlights: string[];
+  status?: string;
   technologies: string[];
   imageUrl?: string;
   repoUrl?: string;
@@ -14,7 +16,8 @@ export interface Job {
   role: string;
   startDate: string;
   endDate: string;
-  description: string;
+  summary: string;
+  highlights: string[];
   technologies: string[];
   logo?: string;
 }
@@ -61,6 +64,7 @@ export interface Certification {
 export interface Language {
   language: string;
   level: string;
+  flag?: string;
 }
 
 export interface PortfolioData {

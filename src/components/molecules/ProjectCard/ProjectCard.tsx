@@ -1,10 +1,10 @@
 import React from "react";
-import { Github, ExternalLink } from "lucide-react";
-import { Card } from "../../atoms/Card";
-import { Tag } from "../../atoms/Tag";
-import { Button } from "../../atoms/Button";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Project } from "../../../types";
 import { getTechIcon } from "../../../data/config";
+import { Tag } from "../../atoms/Tag";
+import { itemVariants } from "../../../animations/constants";
 import styles from "./ProjectCard.module.css";
 
 interface ProjectCardProps {
@@ -12,38 +12,73 @@ interface ProjectCardProps {
   onClick: () => void;
 }
 
+const getInitials = (title: string) =>
+  title
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   onClick,
 }) => (
-  <Card className={styles.card} onClick={onClick} whileHover={{ y: -5 }}>
-    <div className={styles.header}>
-      <h3 className={styles.title}>{project.title}</h3>
-    </div>
+  <motion.article className={styles.card} variants={itemVariants}>
+    <button type="button" className={styles.main} onClick={onClick}>
+      <div className={styles.mark} aria-hidden>
+        {getInitials(project.title) || "P"}
+      </div>
 
-    <p className={styles.description}>{project.description}</p>
+      <div className={styles.body}>
+        <div className={styles.topRow}>
+          <h3 className={styles.title}>{project.title}</h3>
+          {project.status && (
+            <span className={styles.badge}>{project.status}</span>
+          )}
+        </div>
 
-    <div className={styles.tags}>
-      {project.technologies.slice(0, 3).map((tech) => (
-        <Tag key={tech} label={tech} icon={getTechIcon(tech)} />
-      ))}
-    </div>
+        <p className={styles.summary}>{project.summary}</p>
 
-    <div className={styles.actions}>
-      {project.repoUrl && (
-        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" icon={<Github size={16} />}>
+        <div className={styles.tags}>
+          {project.technologies.slice(0, 4).map((tech) => (
+            <Tag key={tech} label={tech} icon={getTechIcon(tech)} />
+          ))}
+        </div>
+      </div>
+
+      <span className={styles.action} aria-hidden>
+        <ArrowUpRight size={18} />
+      </span>
+    </button>
+
+    {(project.repoUrl || project.liveUrl) && (
+      <div className={styles.links}>
+        {project.repoUrl && (
+          <a
+            href={project.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <Github size={15} />
             Code
-          </Button>
-        </a>
-      )}
-      {project.liveUrl && (
-        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-          <Button variant="secondary" icon={<ExternalLink size={16} />}>
+          </a>
+        )}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <ExternalLink size={15} />
             Live
-          </Button>
-        </a>
-      )}
-    </div>
-  </Card>
+          </a>
+        )}
+      </div>
+    )}
+  </motion.article>
 );

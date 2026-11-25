@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { portfolioData } from "../../../../data/config";
@@ -8,9 +8,37 @@ import { useProjectSelection } from "./useProjectSelection";
 import { ProjectList } from "./ProjectList";
 import styles from "../View.module.css";
 
-export const ProjectsView: React.FC = () => {
+interface ProjectsViewProps {
+  onDetailChange?: (
+    detail: {
+      title: string;
+      parentLabel: string;
+      clear: () => void;
+    } | null,
+  ) => void;
+}
+
+export const ProjectsView: React.FC<ProjectsViewProps> = ({
+  onDetailChange,
+}) => {
   const { selectedProject, selectProject, clearSelection, hasSelection } =
     useProjectSelection(portfolioData.projects);
+
+  useEffect(() => {
+    if (selectedProject) {
+      onDetailChange?.({
+        title: selectedProject.title,
+        parentLabel: "Projects",
+        clear: clearSelection,
+      });
+    } else {
+      onDetailChange?.(null);
+    }
+  }, [selectedProject, clearSelection, onDetailChange]);
+
+  useEffect(() => {
+    return () => onDetailChange?.(null);
+  }, [onDetailChange]);
 
   return (
     <div className={styles.viewContainer}>
@@ -29,10 +57,7 @@ export const ProjectsView: React.FC = () => {
               animate="visible"
               exit="exit"
             >
-              <ProjectDetail
-                project={selectedProject}
-                onBack={clearSelection}
-              />
+              <ProjectDetail project={selectedProject} />
             </motion.div>
           )
         )}

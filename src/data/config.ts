@@ -1,5 +1,10 @@
 import type { PortfolioData } from "../types";
 
+export const getAssetPath = (path: string): string => {
+  const base = import.meta.env.BASE_URL || "/";
+  return `${base}${path.startsWith("/") ? path.slice(1) : path}`;
+};
+
 export const techIcons: Record<string, string> = {
   React:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -43,6 +48,8 @@ export const techIcons: Record<string, string> = {
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
   PostgreSQL:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+  Neo4j:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg",
   MongoDB:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
   SQLite:
@@ -51,7 +58,7 @@ export const techIcons: Record<string, string> = {
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
   GraphQL:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
-  AWS: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  AWS: getAssetPath("/logos/aws.svg"),
   Azure:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
   Git: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
@@ -66,13 +73,6 @@ export const techIcons: Record<string, string> = {
   Android:
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
   gRPC: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",
-  "CompTIA Security+":
-    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/network/network-original.svg",
-};
-
-export const getAssetPath = (path: string): string => {
-  const base = import.meta.env.BASE_URL || "/";
-  return `${base}${path.startsWith("/") ? path.slice(1) : path}`;
 };
 
 export const getTechIcon = (techName: string): string | null => {
@@ -82,16 +82,17 @@ export const getTechIcon = (techName: string): string | null => {
 export const portfolioData: PortfolioData = {
   profile: {
     name: "Mikołaj Migacz",
-    title: "Software Engineer",
+    title: "Full Stack Engineer",
     location: "Warsaw, Poland",
     shortBio:
-      "Dedicated Software Engineer with a passion for software development, continuously improving skills beyond professional commitments.",
-    longBio: `Dedicated Software Engineer with a passion for software development. Fell in love with TypeScript (React & Node.js). Eager to contribute innovative solutions. Growing Full Stack skills through modern projects and preparing for CompTIA Security+ to deepen cybersecurity knowledge.`,
-    interests: ["Football", "Cybersecurity", "New Technologies", "Traveling"],
+      "Full Stack Engineer in Warsaw. I build TypeScript systems with Node.js, React and AWS, and work with distributed teams across Poland and the US.",
+    longBio:
+      "I'm a Full Stack Engineer based in Warsaw. Most of my work sits in TypeScript (Node.js and React), with AWS in the mix for production systems that need to stay up. I like owning a feature from design through to something that actually ships, and I'm used to working asynchronously with teams in Poland and the US. Lately I also help teammates get real use out of AI coding tools without treating them as magic.",
+    interests: ["Football", "Traveling"],
     socials: {
       github: "https://github.com/mikolajmigacz",
       linkedin: "https://www.linkedin.com/in/mikolaj-migacz/",
-      cv: "https://drive.google.com/file/d/1flZehNVwBjdOAH_I_IO2vfIGe9xd2weP/view",
+      cv: "https://drive.google.com/file/d/1mHc7J7Q7iwBCv23MQXVr60PBHZg8G4ao/view?usp=sharing",
       email: "mig.mikolaj@gmail.com",
     },
   },
@@ -102,19 +103,41 @@ export const portfolioData: PortfolioData = {
       role: "Software Engineer",
       startDate: "April 2025",
       endDate: "Present",
-      description:
-        "Currently involved in the development of a decision service. Previously designed and implemented a reporting module leveraging AWS cloud services. Regularly responsible for feature development and performance optimization.",
-      technologies: ["React", "Node.js", "Go", "AWS", "gRPC"],
+      summary:
+        "Real-time payment decisioning in a high-availability environment.",
+      highlights: [
+        "Own backend architecture end to end: microservices and gRPC/REST APIs with Node.js, Go and AWS, plus React on the product side when needed.",
+        "Built a multi-tenant data module that stores tenant data in Neo4j or PostgreSQL, and ran migrations covering millions of records.",
+        "Added caching on two high-traffic endpoints that cut unnecessary DB calls by about 30%.",
+        "Shipped a reporting module on AWS.",
+        "Help the team adopt Copilot, Claude and Cursor in a practical way.",
+      ],
+      technologies: [
+        "Node.js",
+        "React",
+        "Go",
+        "AWS",
+        "gRPC",
+        "PostgreSQL",
+        "Neo4j",
+      ],
       logo: getAssetPath("/logos/visa.webp"),
     },
     {
       id: "ant",
-      company: "ANT Solutions Sp. z o.o.",
-      role: "Fullstack Developer",
+      company: "ANT Solutions",
+      role: "Full Stack Software Engineer (Remote)",
       startDate: "February 2023",
       endDate: "March 2025",
-      description:
-        "Implemented a real-time production scheduling module to improve operational efficiency. Built a responsive user interface using Ant Design and Redux, ensuring smooth interaction with complex production data.",
+      summary:
+        "Real-time production scheduling used daily on the shop floor.",
+      highlights: [
+        "Architected and built a scheduling system used daily by about 15 operators (React, Redux, Node.js, PostgreSQL and gRPC).",
+        "Cut manual scheduling from roughly three hours to under one hour per shift.",
+        "Owned features end to end across REST and gRPC services.",
+        "Raised test coverage from about 20% to 65% as part of a code quality push.",
+        "Worked in an agile team with Docker-based CI/CD.",
+      ],
       technologies: [
         "React",
         "Node.js",
@@ -122,28 +145,37 @@ export const portfolioData: PortfolioData = {
         "gRPC",
         "Redux",
         "Ant Design",
+        "Docker",
       ],
       logo: getAssetPath("/logos/ant.webp"),
     },
     {
       id: "kryptos",
-      company: "Kryptos72 Sp. z o.o.",
-      role: "Junior Fullstack Developer",
+      company: "Kryptos72",
+      role: "Junior Full Stack Developer",
       startDate: "October 2022",
       endDate: "January 2023",
-      description:
-        "Created a customer panel with features for order tracking, chat, and invoices. Worked on backend and MongoDB optimizations to reduce response times and improve overall system performance.",
+      summary:
+        "Customer portal with tracking, chat and invoicing for business clients.",
+      highlights: [
+        "Built a customer portal with order tracking, live chat and invoicing for around 30 business clients.",
+        "Stack: React, Node.js, MongoDB and REST.",
+        "Tuned MongoDB queries and backend logic so key endpoints went from roughly 600ms to about 150ms.",
+      ],
       technologies: ["React", "Node.js", "MongoDB", "REST"],
       logo: getAssetPath("/logos/kryptos.webp"),
     },
     {
       id: "comarch",
-      company: "COMARCH S.A",
+      company: "Comarch S.A.",
       role: "Junior .NET Developer",
       startDate: "July 2022",
       endDate: "September 2022",
-      description:
-        "Optimized the WMS module by improving SQL queries and implementing caching. Developed automated reporting features to reduce manual workload for end-users.",
+      summary: "WMS performance work and automated reporting in .NET.",
+      highlights: [
+        "Improved a WMS module through SQL tuning and caching, bringing report generation down from about 45 seconds to 10.",
+        "Built an automated reporting module in ASP.NET that replaced a manual process taking roughly two to three hours a day.",
+      ],
       technologies: [".NET", "ASP.NET", "SQLite"],
       logo: getAssetPath("/logos/comarch.webp"),
     },
@@ -152,59 +184,61 @@ export const portfolioData: PortfolioData = {
     {
       id: "jobmatch",
       title: "JobMatch",
-      description:
-        'A cutting-edge job matching platform built with a Microservices architecture and Microfrontends. Features an AI-powered CV analysis engine (deep learning via Gemini API) to provide candidates with instant, personalized feedback. The UX is designed for seamless interaction, featuring real-time "It\'s a Match!" notifications, smart filters, and a secure, role-based dashboard for both employers and job seekers. Fully type-safe from database to UI.',
+      summary: "Full-stack job matching platform with microservices and AI CV analysis.",
+      status: "In development",
+      highlights: [
+        "Seven NestJS/Express services behind an API Gateway, with Webpack Module Federation on the frontend.",
+        "End-to-end type safety through tRPC and shared Zod schemas.",
+        "Event-driven notifications on AWS (SQS, DynamoDB, S3), with LocalStack for local work.",
+        "Google Gemini for CV analysis.",
+        "JWT auth with RBAC; Docker and GitHub Actions for CI/CD.",
+      ],
       technologies: [
         "TypeScript",
-        "Node.js",
         "NestJS",
         "React",
         "AWS",
         "Docker",
-        "Microservices",
+        "tRPC",
+        "gRPC",
       ],
       repoUrl: "https://github.com/mikolajmigacz/JobMatch",
     },
   ],
   skills: [
     {
-      category: "Advanced",
+      category: "Languages & Frameworks",
       items: [
-        "React",
-        "Node.js",
         "TypeScript",
         "JavaScript",
-        "AWS",
-        "Azure",
-        "PostgreSQL",
-        "MongoDB",
-        "REST",
-        "gRPC",
-        "Jest",
-        "Cypress",
-        "Ant Design",
-        "Material-UI",
-        "HTML/CSS",
-      ],
-    },
-    {
-      category: "Intermediate",
-      items: [
-        "Java",
-        "Spring",
+        "Node.js",
+        "React",
+        "Redux",
+        "NestJS",
         "Go",
         ".NET",
         "ASP.NET",
-        "Angular",
-        "Dart",
-        "Flutter",
-        "Tailwind",
-        "Firebase",
       ],
     },
     {
-      category: "Beginner",
-      items: ["Kotlin", "Android"],
+      category: "Backend & Architecture",
+      items: ["Microservices", "gRPC", "REST", "System Design"],
+    },
+    {
+      category: "Cloud & DevOps",
+      items: ["AWS", "Docker", "CI/CD", "Git", "Azure"],
+    },
+    {
+      category: "Databases",
+      items: ["PostgreSQL", "Neo4j", "MongoDB"],
+    },
+    {
+      category: "Testing",
+      items: ["Jest", "Cypress"],
+    },
+    {
+      category: "AI Tools",
+      items: ["GitHub Copilot", "Cursor", "Claude"],
     },
   ],
   education: [
@@ -232,7 +266,15 @@ export const portfolioData: PortfolioData = {
     },
   ],
   languages: [
-    { language: "Polish", level: "Native" },
-    { language: "English", level: "B2" },
+    {
+      language: "Polish",
+      level: "Native",
+      flag: "https://flagcdn.com/w80/pl.png",
+    },
+    {
+      language: "English",
+      level: "Professional Working Proficiency",
+      flag: "https://flagcdn.com/w80/gb.png",
+    },
   ],
 };

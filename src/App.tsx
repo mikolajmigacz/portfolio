@@ -1,18 +1,39 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { HomeTemplate } from './components/templates/HomeTemplate';
-import { SectionTemplate } from './components/templates/SectionTemplate';
-import { ProfileHeader } from './components/organisms/ProfileHeader';
-import { Navigation } from './components/organisms/Navigation';
-import { Loader } from './components/atoms/Loader';
-import { AboutView, SkillsView, WorkView, ProjectsView } from './components/organisms/views';
-import { portfolioData } from './data/config';
+import { useState, useEffect, useCallback, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { HomeTemplate } from "./components/templates/HomeTemplate";
+import { SectionTemplate } from "./components/templates/SectionTemplate";
+import { ProfileHeader } from "./components/organisms/ProfileHeader";
+import { Navigation } from "./components/organisms/Navigation";
+import { Loader } from "./components/atoms/Loader";
+import {
+  AboutView,
+  SkillsView,
+  WorkView,
+  ProjectsView,
+} from "./components/organisms/views";
+import { portfolioData } from "./data/config";
 
-type ViewId = 'home' | 'about' | 'work' | 'projects' | 'skills';
+type ViewId = "home" | "about" | "work" | "projects" | "skills";
+
+type SectionDetail = {
+  title: string;
+  parentLabel: string;
+};
+
+const sectionTitles: Record<Exclude<ViewId, "home">, string> = {
+  about: "About",
+  work: "Work",
+  projects: "Projects",
+  skills: "Skills",
+};
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState<ViewId>('home');
+  const [activeView, setActiveView] = useState<ViewId>("home");
+  const [sectionDetail, setSectionDetail] = useState<SectionDetail | null>(
+    null,
+  );
+  const clearDetailRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,25 +42,70 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  const resetDetail = useCallback(() => {
+    clearDetailRef.current = null;
+    setSectionDetail(null);
+  }, []);
+
   const handleNavigate = (viewId: string) => {
+    resetDetail();
     setActiveView(viewId as ViewId);
   };
 
   const handleBack = () => {
-    setActiveView('home');
+    if (sectionDetail && clearDetailRef.current) {
+      clearDetailRef.current();
+      resetDetail();
+      return;
+    }
+    setActiveView("home");
   };
+
+  const handleHome = () => {
+    resetDetail();
+    setActiveView("home");
+  };
+
+  const handleDetailChange = useCallback(
+    (
+      detail: {
+        title: string;
+        parentLabel: string;
+        clear: () => void;
+      } | null,
+    ) => {
+      if (!detail) {
+        resetDetail();
+        return;
+      }
+      clearDetailRef.current = detail.clear;
+      setSectionDetail({
+        title: detail.title,
+        parentLabel: detail.parentLabel,
+      });
+    },
+    [resetDetail],
+  );
 
   const renderContent = () => {
     switch (activeView) {
-      case 'work': return <WorkView />;
-      case 'projects': return <ProjectsView />;
-      case 'skills': return <SkillsView />;
-      case 'about': return <AboutView />;
-      default: return null;
+      case "work":
+        return <WorkView onDetailChange={handleDetailChange} />;
+      case "projects":
+        return <ProjectsView onDetailChange={handleDetailChange} />;
+      case "skills":
+        return <SkillsView />;
+      case "about":
+        return <AboutView />;
+      default:
+        return null;
     }
   };
 
-  const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+  const sectionTitle =
+    sectionDetail?.title ??
+    (activeView !== "home" ? sectionTitles[activeView] : "");
+  const backLabel = sectionDetail ? sectionDetail.parentLabel : "Home";
 
   return (
     <>
@@ -56,36 +122,38 @@ function App() {
       </AnimatePresence>
 
       {!loading && (
-          <>
-            <ProfileHeader 
-                profile={portfolioData.profile} 
-                variant={activeView === 'home' ? 'hero' : 'footer'} 
-            >
-                {activeView === 'home' && (
-                    <Navigation activeView={activeView} onNavigate={handleNavigate} />
-                )}
-            </ProfileHeader>
+        <>
+          <ProfileHeader
+            profile={portfolioData.profile}
+            variant={activeView === "home" ? "hero" : "footer"}
+            onHomeClick={activeView !== "home" ? handleHome : undefined}
+          >
+            {activeView === "home" && (
+              <Navigation
+                activeView={activeView}
+                onNavigate={handleNavigate}
+              />
+            )}
+          </ProfileHeader>
 
-            <AnimatePresence mode="wait">
-                {activeView === 'home' && (
-                <HomeTemplate key="home" />
-                )}
+          <AnimatePresence mode="wait">
+            {activeView === "home" && <HomeTemplate key="home" />}
 
-                {activeView !== 'home' && (
-                <SectionTemplate 
-                    key="section"
-                    title={capitalize(activeView)}
-                    onBack={handleBack}
-                >
-                    {renderContent()}
-                </SectionTemplate>
-                )}
-            </AnimatePresence>
-          </>
+            {activeView !== "home" && (
+              <SectionTemplate
+                key="section"
+                title={sectionTitle}
+                backLabel={backLabel}
+                onBack={handleBack}
+              >
+                {renderContent()}
+              </SectionTemplate>
+            )}
+          </AnimatePresence>
+        </>
       )}
     </>
   );
 }
 
 export default App;
-

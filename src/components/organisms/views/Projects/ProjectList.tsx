@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import type { Project } from "../../../../types";
-import { fadeInVariants } from "../../../../animations/constants";
+import { containerVariants } from "../../../../animations/constants";
 import { ProjectCard } from "../../../molecules/ProjectCard";
-import styles from "../View.module.css";
+import styles from "./ProjectList.module.css";
 
 interface ProjectListProps {
   projects: Project[];
@@ -16,11 +16,11 @@ export const ProjectList: React.FC<ProjectListProps> = ({
 }) => (
   <motion.div
     key="list"
-    className={styles.grid}
-    variants={fadeInVariants}
+    className={styles.list}
+    variants={containerVariants}
     initial="hidden"
     animate="visible"
-    exit="exit"
+    exit={{ opacity: 0, x: -12 }}
   >
     {projects.map((project) => (
       <ProjectCard

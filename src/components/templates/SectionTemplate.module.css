@@ -1,6 +1,6 @@
 .container {
-  width: 100%; /* Was 100vw, caused overflow with scrollbar */
-  height: 100%; /* Was 100vh */
+  width: 100%;
+  height: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,41 +13,57 @@
 
 .header {
   display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Left align */
-  gap: var(--spacing-md); /* Space between back and title */
-  padding: var(--spacing-lg) var(--spacing-xl);
-  background: var(--bg-primary); 
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-md);
+  background: var(--bg-primary);
   z-index: 10;
-  
-  /* Constrain width to match content */
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.35rem 0.55rem 0.35rem 0.35rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.backBtn:hover,
+.backBtn:focus-visible {
+  color: var(--text-primary);
+  background: rgba(246, 240, 215, 0.08);
+  outline: none;
+}
+
+.backLabel {
+  line-height: 1;
+}
+
 .title {
   font-family: var(--font-family);
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
-  text-transform: capitalize;
+  line-height: 1.15;
+  max-width: 100%;
 }
-
-.backWrapper {
-  display: flex;
-  /* Remove fixed width */
-}
-
-.backBtn {
-  border: none !important; /* Minimalist override */
-  font-size: 1.1rem;
-  padding-left: 0;
-}
-
-/* ... middle styles unchanged ... */
 
 .content {
   flex: 1;
@@ -58,35 +74,26 @@
   margin: 0 auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-medium) transparent;
-  box-sizing: border-box; /* Ensure padding doesn't add to width */
-  padding-bottom: 120px; /* Space for desktop footer */
+  box-sizing: border-box;
+  padding-bottom: 120px;
 }
 
 @media (max-width: 768px) {
   .header {
     padding: var(--spacing-md);
-    height: 60px; /* Compact mobile header */
+    gap: 0.35rem;
   }
 
   .title {
-    font-size: 1.5rem; /* Smaller title */
+    font-size: 1.5rem;
   }
 
   .backBtn {
-    font-size: 0; /* Hide "Back" text */
-  }
-  .backBtn::before {
-    content: ''; 
-    font-size: 0.9rem;
-  }
-  
-  .backWrapper {
-    width: auto; 
+    font-size: 0.85rem;
+    padding: 0.3rem 0.45rem 0.3rem 0.25rem;
   }
 
   .content {
-    /* Large bottom padding to ensure scrolling past fixed footer */
-    padding: 0 var(--spacing-md) 160px !important; 
+    padding: 0 var(--spacing-md) 160px !important;
   }
 }
-

@@ -8,10 +8,16 @@ import { Button } from '../atoms/Button';
 interface ProfileHeaderProps {
   profile: UserProfile;
   variant?: 'hero' | 'footer';
+  onHomeClick?: () => void;
   children?: React.ReactNode;
 }
 
-export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant = 'hero', children }) => {
+export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
+  profile,
+  variant = 'hero',
+  onHomeClick,
+  children,
+}) => {
   const isFooter = variant === 'footer';
 
   return (
@@ -21,37 +27,63 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, variant =
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div className={styles.container} layout>
-        <motion.div className={styles.mainInfo} layout>
-            <motion.h1 
-            className={styles.name} 
-            layout="position"
-            style={{ fontSize: isFooter ? '1.5rem' : 'var(--font-size-name)' }}
+        {isFooter && onHomeClick ? (
+          <button
+            type="button"
+            className={styles.homeLink}
+            onClick={onHomeClick}
+            aria-label="Go to home"
+          >
+            <motion.div className={styles.mainInfo} layout>
+              <motion.h1
+                className={styles.name}
+                layout="position"
+                style={{ fontSize: '1.5rem' }}
+              >
+                {profile.name}
+              </motion.h1>
+              <motion.span
+                className={styles.title}
+                layout="position"
+                style={{ fontSize: '1rem' }}
+              >
+                {profile.title}
+              </motion.span>
+            </motion.div>
+          </button>
+        ) : (
+          <motion.div className={styles.mainInfo} layout>
+            <motion.h1
+              className={styles.name}
+              layout="position"
+              style={{ fontSize: isFooter ? '1.5rem' : 'var(--font-size-name)' }}
             >
-            {profile.name}
+              {profile.name}
             </motion.h1>
-            
+
             {!isFooter && (
-                <motion.h2 
-                className={styles.title} 
+              <motion.h2
+                className={styles.title}
                 layout="position"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 style={{ fontSize: 'var(--font-size-title)' }}
-                >
+              >
                 {profile.title}
-                </motion.h2>
+              </motion.h2>
             )}
             {isFooter && (
-                 <motion.span 
-                 className={styles.title} 
-                 layout="position"
-                 style={{ fontSize: '1rem' }}
-                 >
-                 {profile.title}
-                 </motion.span>
+              <motion.span
+                className={styles.title}
+                layout="position"
+                style={{ fontSize: '1rem' }}
+              >
+                {profile.title}
+              </motion.span>
             )}
-        </motion.div>
+          </motion.div>
+        )}
 
         <motion.div 
             className={styles.details} 

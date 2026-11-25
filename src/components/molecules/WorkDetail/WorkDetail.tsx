@@ -1,54 +1,73 @@
 import React from "react";
-import { ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Job } from "../../../types";
-import { Button } from "../../atoms/Button";
 import { Tag } from "../../atoms/Tag";
 import { getTechIcon } from "../../../data/config";
+import { containerVariants, itemVariants } from "../../../animations/constants";
 import styles from "./WorkDetail.module.css";
 
 interface WorkDetailProps {
   job: Job;
-  onBack: () => void;
 }
 
-export const WorkDetail: React.FC<WorkDetailProps> = ({ job, onBack }) => (
-  <div>
-    <Button
-      variant="outline"
-      onClick={onBack}
-      icon={<ArrowLeft size={16} />}
-      className={styles.backButton}
+export const WorkDetail: React.FC<WorkDetailProps> = ({ job }) => {
+  const isCurrent = job.endDate.toLowerCase() === "present";
+
+  return (
+    <motion.div
+      className={styles.detail}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
     >
-      Back to List
-    </Button>
-
-    <div>
-      <div className={styles.header}>
-        {job.logo && (
-          <img src={job.logo} alt={job.company} className={styles.logo} />
-        )}
-        <div>
-          <h3 className={styles.title}>{job.role}</h3>
-          <span className={styles.subtitle}>{job.company}</span>
+      <motion.header className={styles.hero} variants={itemVariants}>
+        <div className={styles.logoWrap}>
+          {job.logo ? (
+            <img
+              src={job.logo}
+              alt={`${job.company} logo`}
+              className={styles.logo}
+            />
+          ) : (
+            <span className={styles.logoFallback}>
+              {job.company.slice(0, 1)}
+            </span>
+          )}
         </div>
-      </div>
 
-      <p className={styles.date}>
-        {job.startDate} - {job.endDate}
-      </p>
+        <div className={styles.heroText}>
+          <div className={styles.metaRow}>
+            <span className={styles.company}>{job.company}</span>
+            {isCurrent && <span className={styles.badge}>Present</span>}
+          </div>
+          <h3 className={styles.title}>{job.role}</h3>
+          <p className={styles.date}>
+            {job.startDate} - {job.endDate}
+          </p>
+          <p className={styles.summary}>{job.summary}</p>
+        </div>
+      </motion.header>
 
-      <div className={styles.description}>
-        <p>{job.description}</p>
-      </div>
+      <motion.section className={styles.section} variants={itemVariants}>
+        <h4 className={styles.sectionTitle}>Highlights</h4>
+        <ul className={styles.highlights}>
+          {job.highlights.map((item) => (
+            <li key={item} className={styles.highlight}>
+              <span className={styles.bullet} aria-hidden />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </motion.section>
 
-      <div className={styles.techSection}>
-        <h4 className={styles.techTitle}>Technologies</h4>
+      <motion.section className={styles.section} variants={itemVariants}>
+        <h4 className={styles.sectionTitle}>Stack</h4>
         <div className={styles.tags}>
           {job.technologies.map((tech) => (
             <Tag key={tech} label={tech} icon={getTechIcon(tech)} />
           ))}
         </div>
-      </div>
-    </div>
-  </div>
-);
+      </motion.section>
+    </motion.div>
+  );
+};

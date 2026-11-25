@@ -36,6 +36,30 @@
   pointer-events: auto;
 }
 
+.homeLink {
+  all: unset;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: 0.15rem 0.35rem;
+  margin: -0.15rem -0.35rem;
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+}
+
+.homeLink:hover,
+.homeLink:focus-visible {
+  opacity: 0.75;
+  outline: none;
+}
+
+.homeLink:focus-visible {
+  box-shadow: 0 0 0 2px rgba(246, 240, 215, 0.35);
+}
+
+.header.footer .homeLink .mainInfo {
+  align-items: flex-start;
+}
+
 .header.footer .container {
   display: flex;
   flex-direction: row;
@@ -117,6 +141,10 @@
   .header.footer .name {
     font-size: 1rem !important;
     text-align: left;
+  }
+
+  .header.footer .homeLink .mainInfo {
+    align-items: flex-start;
   }
   
   .header.footer .details {

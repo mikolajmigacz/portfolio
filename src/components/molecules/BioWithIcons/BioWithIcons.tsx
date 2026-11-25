@@ -7,10 +7,14 @@ interface BioWithIconsProps {
   text: string;
 }
 
-const TECH_KEYWORDS = ["TypeScript", "React", "Node.js", "CompTIA Security+"];
+const TECH_KEYWORDS = ["TypeScript", "React", "Node.js", "AWS"];
+
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export const BioWithIcons: React.FC<BioWithIconsProps> = ({ text }) => {
-  const parts = text.split(new RegExp(`(${TECH_KEYWORDS.join("|")})`, "g"));
+  const pattern = TECH_KEYWORDS.map(escapeRegExp).join("|");
+  const parts = text.split(new RegExp(`(${pattern})`, "g"));
 
   return (
     <span>
